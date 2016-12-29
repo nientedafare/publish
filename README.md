@@ -8,7 +8,7 @@ Porting of [_Publish Theme_] (https://github.com/kovshenin/publish) for [WordPre
 
 Illustration: _King looking in mirror_ [openclipart.org] (https://openclipart.org/detail/203647/king-looking-in-mirror)
 
-[Tumblr] (https:tumblr.com)
+[tumblr.com] (https:tumblr.com)
 
 Created by [gfrancescoa] (https://www.tumblr.com/themes/by/gfrancescoa)
 
