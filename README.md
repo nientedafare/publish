@@ -1,6 +1,6 @@
 # Publish on Tumblr
 
-### Tumbrl theme
+### Tumblr theme
 
 Porting of [_Publish Theme_] (https://github.com/kovshenin/publish) for [WordPress] (https://wordpress.org/) - released under the [GPL license] (https://www.gnu.org/licenses/gpl-3.0.html) - created by [Konstantin Kovshenin] (https://konstantin.blog)
 
