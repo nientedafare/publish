@@ -309,6 +309,17 @@
                 line-height: 21px;
                 text-transform: capitalize;
             }
+            .searching {
+                color: {color:Footer};
+                font-family: {font:Title};
+                font-size: 13px;
+                line-height: 21px;
+                padding-top: 10px;
+                margin-bottom: -10px;
+            }
+            .types {
+                
+            }
             .blockquote, 
             blockquote {
                 margin: 0 1.5em 20px;
@@ -598,7 +609,14 @@
             {/block:IndexPage}
         </div>
         <div class="content">
-                {block:Posts}
+            {block:SearchPage}
+                <h1 class="searching">{lang:Found SearchResultCount results for SearchQuery}:</h1>
+            {/block:SearchPage}
+            {block:NoSearchResults}
+                <h1 class="searching">{lang:Sorry no results for SearchQuery}</h1>
+            {/block:NoSearchResults}
+            
+            {block:Posts}
                 <article>
                     {block:Text}
                         <div class="post text">
@@ -799,7 +817,8 @@
                     
                     <footer class="entry-meta">
                         {block:RebloggedFrom}<p>{block:ContentSource}{lang:Source}: <a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource} <span style="text-transform: lowercase;">{lang:Via}</span> <a href="{ReblogParentURL}">{ReblogParentName}</a></p>{/block:RebloggedFrom}
-                        <!--<p>{lang:PostTypeNoun reblogged from ReblogParentName 2}. {lang:Originally from ReblogRootName 2}</p>--> <a href="{Permalink}">{Month} {DayOfMonth}, {Year}</a>{block:NoteCount}, {NoteCountWithLabel}{/block:NoteCount}{block:IfAuthor}. {lang:By PostAuthorName}{/block:IfAuthor}{block:HasTags}. {lang:Tagged with} {block:Tags}<a href="{TagURL}" style="">{Tag}</a> {/block:Tags}{/block:HasTags}
+                        
+                        <a href="{Permalink}">{Month} {DayOfMonth}, {Year}</a>{block:IfNotDisqusShortname}{block:NoteCount}, {NoteCountWithLabel}{/block:NoteCount}{block:IfNotDisqusShortname}{block:IfDisqusShortname}. {lang:It has NoteCount notes and 0 comments}{/block:IfDisqusShortname}{block:IfAuthor}. {lang:By PostAuthorName}{/block:IfAuthor}{block:HasTags}. {lang:Tagged with} {block:Tags}<a href="{TagURL}" style="">{Tag}</a> {/block:Tags}{/block:HasTags}
                     </footer>
                     
                     {block:PermalinkPage}
@@ -826,7 +845,6 @@
                             <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
                         {/block:IfDisqusShortname}
                     {/block:PermalinkPage} 
-                    
                     </article>
                 {/block:Posts}
                
