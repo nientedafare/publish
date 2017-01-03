@@ -10,6 +10,4 @@ Illustration: _King looking in mirror_ [openclipart.org] (https://openclipart.or
 
 [tumblr.com] (https:tumblr.com)
 
-Created by [gfrancescoa] (https://www.tumblr.com/themes/by/gfrancescoa)
-
 December 2016
