@@ -57,6 +57,8 @@
         <meta name="text:Tag 3" content=""/>
         <meta name="text:Tag 4" content=""/>
         <meta name="text:Tag 5" content=""/>
+        <meta name="text:Open quote" content="“"/>
+        <meta name="text:Close quote" content="”"/>
         <meta name="text:ISO Language Code" content="en"/>
         
         <style>
@@ -119,15 +121,35 @@
             b {
                 font-weight: bold;
             }
+            blockquote,
             q {
                 font-style: italic;
                 font-family: {font:Quote};
             }
-            q::before {
-                content: "&#147; ";
+            q {
+                quotes: "{text:Open quote}" "{text:Close quote}" "‘" "’";
             }
-            q::after {
-              content: " &#148;";
+            q:before {
+                content: open-quote;
+            }
+            q:after {
+                content: close-quote;
+            }
+            table {
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid {color:Border};
+            }
+            th, td {
+                padding: 2px 5px;
+            }
+            caption { font-size: 0.8em; }
+            hr {
+                height: 1px;
+                border: .1px solid {color:Body};
+                color,
+                background-color: {color:Body};
             }
             
             .content a {
@@ -337,11 +359,12 @@
             .tag {
                 font-style: italic;
             }
-            .blockquote, 
-            blockquote {
-                margin: 0 1.5em 20px;
-                font-style: italic;
+            .blockquote {
                 font-family: {font:Quote};
+                font-style: italic;
+                font-size: 1.1em;
+                font-weight: 500;
+                margin: 1em 25px;
             }
             .label {
                 font-variant: small-caps;
@@ -364,9 +387,12 @@
                 min-width: 250px;
                 float: left;
             }
-            .audio_player table {
-                border-collapse: collapse;
+            .audio_player table,
+            .audio_player th,
+            .audio_player td {
                 text-align: left;
+                border: 0px;
+                padding: 0;
             }
             .videoWrapper {
                 position: relative;
@@ -727,8 +753,9 @@
                         {block:PermalinkPage}
                             <h1 class="types">{lang:Quote}:</h1>
                         {/block:PermalinkPage}
-                            <div class="blockquote">{Quote}</div>
-    
+                            <div class="blockquote">
+                                {Quote}
+                            </div>
                             {block:Source}
                                 <div class="source"><p>{Source}</p></div>
                             {/block:Source}
@@ -775,7 +802,9 @@
                                 <h1 class="types">{lang:Replies}:</h1>
                             {/block:PermalinkPage}
                             <p><img src="{AskerPortraitURL-96}" style="width:16px; margin-right:5px;">{lang:Asker asked}:</p>
-                            <div class="blockquote">{Question}</div>
+                            <div class="blockquote">
+                                {Question}
+                            </div>
                             <p>{Answer}</p>
                         </div>
                     {/block:Answer}
