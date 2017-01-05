@@ -2,6 +2,7 @@
     Publish on tumblr.
     Porting of Publish Theme for WordPress created by Konstantin Kovshenin.
     https://github.com/nientedafare/publish
+    https://www.tumblr.com/theme/40635
 -->
 
 <!DOCTYPE html>
@@ -26,14 +27,14 @@
         <meta name="image:Wallpaper" content=""/>
         <meta name="color:Background" content="#282828"/>
         <meta name="color:Main" content="#ffffff"/>
-        <meta name="color:Title" content="#404040"/>
+        <meta name="color:Heading" content="#404040"/>
         <meta name="color:Body" content="#404040"/>
         <meta name="color:Footer" content="#999999"/>
         <meta name="color:Link" content="#26ADE4"/>
         <meta name="color:Link visited" content="#1E8AB6"/>
         <meta name="color:Link hover" content="#26ADE4"/>
         <meta name="color:Border" content="#DDDDDD"/>
-        <meta name="font:Title" content="PT Serif, serif"/>
+        <meta name="font:Heading" content="PT Serif, serif"/>
         <meta name="font:Body" content="PT Sans, sans-serif"/>
         <meta name="font:Quote" content="Georgia, serif"/>
         <meta name="if:Archive" content="1"/>
@@ -91,7 +92,7 @@
             h6 {
             	margin: 20px 0;
             	font-weight: normal;
-            	font-family: {font:Title};
+            	font-family: {font:Heading};
             }
             h1 {
             	font-size: 22px;
@@ -114,13 +115,27 @@
                 padding: 10px 0 40px 0;
                 border-bottom: solid 1px {color:Border};
             }
+            strong,
+            b {
+                font-weight: bold;
+            }
+            q {
+                font-style: italic;
+                font-family: {font:Quote};
+            }
+            q::before {
+                content: "&#147; ";
+            }
+            q::after {
+              content: " &#148;";
+            }
             
             .content a {
                 text-decoration: underline;
             }
             .title a, 
             .title a:visited {
-                color: {color:Title};
+                color: {color:Heading};
             }
             .post {
                 margin: 1.5em 0;
@@ -163,6 +178,9 @@
                     margin: 40px 0;
                     float: right;
                     width: 70%;
+                }
+                .audio_player table {
+                    max-width: 300px;
                 }
             }
             
@@ -240,16 +258,14 @@
             }
             .site-title a,
             .site-tile a:visited {
-                color: {color:Title};
-                
-                
+                color: {color:Heading};
             }
             #description {
                 margin: 10px 0 0 0;
                 color: {color:Footer};
                 font-weight: 300;
                 font-size: 13px;
-                font-family: {font:Title};
+                font-family: {font:Heading};
             }
             .titlehead {
                 margin-bottom: 20px;
@@ -291,7 +307,7 @@
             /* Posts */
             .text h1 a, 
             .chat h1 a {
-                color: {color:Title};
+                color: {color:Heading};
                 text-decoration: none;
             }
             .text h1 a:hover, 
@@ -304,21 +320,22 @@
             }
             .types {
                 color: {color:Footer};
-                font-family: {font:Title};
+                font-family: {font:Heading};
                 font-size: 13px;
                 line-height: 21px;
                 text-transform: capitalize;
             }
             .searching {
                 color: {color:Footer};
-                font-family: {font:Title};
+                font-family: {font:Heading};
                 font-size: 13px;
                 line-height: 21px;
                 padding-top: 10px;
                 margin-bottom: -10px;
             }
-            .types {
-                
+            .search_query,
+            .tag {
+                font-style: italic;
             }
             .blockquote, 
             blockquote {
@@ -339,13 +356,17 @@
             
             /* Media */
             .audio_cover {
-                width: 200px;
+                width: 207px;
                 float: left;
                 margin-right: 1em;
             }
             .audio_player {
                 min-width: 250px;
                 float: left;
+            }
+            .audio_player table {
+                border-collapse: collapse;
+                text-align: left;
             }
             .videoWrapper {
                 position: relative;
@@ -479,6 +500,8 @@
                 font-style: normal;
                 font-family: {font:Body};
             }
+            
+            {CustomCSS}
         </style>
     </head>
     <body>
@@ -610,11 +633,11 @@
         </div>
         <div class="content">
             {block:SearchPage}
-                <h1 class="searching">{lang:Found SearchResultCount results for SearchQuery}:</h1>
+                <h1 class="searching">{lang:Found SearchResultCount results for SearchQuery 2} {block:NoSearchResults}{lang:Sorry no results for SearchQuery 2}{/block:NoSearchResults}</h1>
             {/block:SearchPage}
-            {block:NoSearchResults}
-                <h1 class="searching">{lang:Sorry no results for SearchQuery}</h1>
-            {/block:NoSearchResults}
+            {block:TagPage}
+                <h1 class="searching">{lang:Posts tagged Tag 2}</h1>
+            {/block:TagPage}
             
             {block:Posts}
                 <article>
@@ -785,18 +808,29 @@
                                 </div>
                                 <div class="audio_player">
                                     {AudioPlayerBlack}
-                                    
+                                    <br>
                                     <h4>
-                                    {block:Artist}
-                                        <div><span class="label">Artist:</span> <span class="line">{Artist}</span></div>
-                                    {/block:Artist}
-                                    {block:Album}
-                                        <div><span class="label">Album:</span> <span class="line">{Album}</span></div>
-                                    {/block:Album}
-                                    {block:TrackName}
-                                        <div><span class="label">Trackname:</span> <span class="line">{TrackName}</span></div>
-                                    {/block:TrackName}
-                                </h4>
+                                    <table>
+                                        {block:TrackName}
+                                        <tr>
+                                            <td><span class="label">Track:&nbsp;</span></td>
+                                            <td><span class="line">{TrackName}</span></td>
+                                        </tr>
+                                        {/block:TrackName}
+                                        {block:Artist}
+                                        <tr>
+                                            <td><span class="label">Artist:</span></td>
+                                            <td><span class="line">{Artist}</span></td>
+                                        </tr>
+                                        {/block:Artist}
+                                        {block:Album}
+                                        <tr>
+                                            <td><span class="label">Album:</span></td>
+                                            <td><span class="line">{Album}</span></td>
+                                        </tr>
+                                        {/block:Album}
+                                    </table>
+                                    </h4>
                                 </div>
                             </div>
                             <div style="clear:both"></div>
@@ -877,7 +911,7 @@
                 {/block:PermalinkPagination}
         </div>
         <div class="credits">
-            {block:IfCopyright}{Title} © {CopyrightYears}. {/block:IfCopyright}<a href="https://github.com/nientedafare/publish" target="_blank">Publish on Tumblr</a> Theme. {lang:Powered by Tumblr 2}
+            {block:IfCopyright}{Title} © {CopyrightYears}. {/block:IfCopyright}<a href="https://www.tumblr.com/theme/40635" target="_blank">Publish on Tumblr</a> Theme. {lang:Powered by Tumblr 2}
         </div>
     </div>
     {block:IfLatestTweet}
