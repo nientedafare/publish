@@ -47,6 +47,8 @@
         <meta name="if:Exif Data" content="0"/>
         <meta name="if:Liked Posts" content="0"/>
         <meta name="if:Latest Tweet" content="0"/>
+        <meta name="if:Daily Pagination" content="0"/>
+        <meta name="if:Related Posts" content="1"/>
         <meta name="select:Wallpaper size" content="auto" title="auto">
         <meta name="select:Wallpaper size" content="cover" title="cover">
         <meta name="select:Wallpaper size" content="contain" title="contain">
@@ -144,7 +146,7 @@
             th, td {
                 padding: 2px 5px;
             }
-            caption { font-size: 0.8em; }
+            caption { font-size: 0.8em; padding: 0 6px 2px 6px;}
             hr {
                 height: 1px;
                 border: .1px solid {color:Body};
@@ -249,9 +251,6 @@
                 .embed_641 {
                     display: none;
                 }
-                #follow {
-                    display: none;
-                }
                 .sidelink li {
                     display: inline;
                     padding-right: 10px;
@@ -259,13 +258,11 @@
                 .masterhead {
                     margin-bottom: 1.5em;
                 }
-                .logoimg {
-                    display: none;
-                }
-                #likes {
-                    display: none;
-                }
-                .group {
+                .logoimg,
+                #likes,
+                #follow,
+                .group,
+                .related {
                     display: none;
                 }
             }
@@ -527,6 +524,44 @@
                 font-family: {font:Body};
             }
             
+            /* Related Posts */
+            .related {
+                width: 100%;
+                font-size: 0.8em;
+            }
+            .audio_container_related {
+                width: 100%;
+                overflow: hidden;
+            }
+            .audio_cover_related {
+                width: 100%;
+                margin-bottom: -5px;
+                background: black;
+            }
+            .blockquote_related {
+                margin: 0 10px;
+                max-height: 260px;
+                overflow-y: hidden;
+            }
+            .blockquote_related a {
+                font-family: {font:Quote};
+                color: {color:Body};
+                font-style: italic;
+            }
+            .source_related {
+                max-height: 100px;
+                overflow-y: hidden;
+            }
+            .permalink_related {
+                margin: 0;
+                padding: 0;
+                line-height: 120%;
+            }
+            .entry_related {
+                max-height: 260px;
+                overflow-y: hidden;
+            }
+            
             {CustomCSS}
         </style>
     </head>
@@ -656,7 +691,97 @@
                 {/block:Likes}
                 {/block:IfLikedPosts}
             {/block:IndexPage}
+            
+            {block:PermalinkPage}
+            {block:IfRelatedPosts}
+                <div class="related">
+                <div class="aside">
+                {block:RelatedPosts}
+                    <h1 class="types">{lang:Related Posts}:</h1>
+                    {block:Posts}
+                        {block:Text}
+                        <div class="post text">
+                            {block:Title}
+                            <h4><a href="{Permalink}">{Title}</a></h4>
+                            {/block:Title}
+                            <div class="entry_related">
+                                {Body}
+                            </div>
+                            <h5 style="margin-top:5px" class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
+                        </div>
+                        {/block:Text}
+                        {block:Link}
+                        <div class="post link">
+                            <h4><a href="{URL}" class="link" {Target}>{Name} ➦</a></h14
+                            {block:Description}
+                                <div class="entry_related">{Description}</div>
+                            {/block:Description}
+                            <h5 style="margin-top:5px" class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
+                        </div>
+                    {/block:Link}
+                        {block:Photo}
+                        <div class="post photo">
+                            <a href="{Permalink}"><img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/></a>
+                            <h5 class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
+                        </div>
+                        {/block:Photo}
+                        {block:Photoset}
+                        <div class="post photoset">
+                            <a href="{Permalink}">{Photoset}</a>
+                            <h5 class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
+                        </div>
+                        {/block:Photoset}
+                        {block:Quote}
+                        <div class="post quote">
+                            <div class="blockquote_related"><a href="{Permalink}">{Quote}</a></div>
+                            {block:Source}
+                                <div class="source_related"><p>{Source}</p></div>
+                            {/block:Source}
+                            <h5 style="margin-top:5px" class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
+                        </div>
+                        {/block:Quote}
+                        {block:Answer}
+                        <div class="post answer">
+                            <p><img src="{AskerPortraitURL-96}" style="width:16px; margin-right:5px;">{lang:Asker asked}:</p>
+                            <div class="blockquoteblockquote_related">
+                                <a href="{Permalink}">{Question}</a>
+                            </div>
+                            <p>{Answer}</p>
+                        </div>
+                        {/block:Answer}
+                        {block:Video}
+                        <div class="post video">
+                            <div class="videoWrapper">
+                                {VideoEmbed-500}
+                            </div>
+                            <h5 style="margin-top:5px" class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
+                        </div>
+                        {/block:Video}
+                        {block:Audio}
+                        <div class="post audio">
+                            {block:AudioPlayer}
+                            <div class="audio_container_related">
+                                <div class="audio_cover_related">
+                                    {block:AlbumArt}
+                                        <a href="{Permalink}"><img src="{AlbumArtURL}"></a>
+                                    {/block:AlbumArt}
+                                </div>
+                                <div class="audio_player_related">
+                                    {AudioPlayerBlack}
+                                </div>
+                            </div>
+                            {/block:AudioPlayer}
+                            <h5 class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
+                        </div>
+                        {/block:Audio}
+                    {/block:Posts}
+                {/block:RelatedPosts}
+                </div>
+                </div>
+            {/block:IfRelatedPosts}
+            {/block:PermalinkPage}
         </div>
+        
         <div class="content">
             {block:SearchPage}
                 <h1 class="searching">{lang:Found SearchResultCount results for SearchQuery 2} {block:NoSearchResults}{lang:Sorry no results for SearchQuery 2}{/block:NoSearchResults}</h1>
@@ -664,6 +789,9 @@
             {block:TagPage}
                 <h1 class="searching">{lang:Posts tagged Tag 2}</h1>
             {/block:TagPage}
+            {block:DayPage}
+                <h1 class="searching">{Month} {DayOfMonth}, {Year}</h1>
+            {/block:DayPage}
             
             {block:Posts}
                 <article>
@@ -881,7 +1009,7 @@
                     <footer class="entry-meta">
                         {block:RebloggedFrom}<p>{block:ContentSource}{lang:Source}: <a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource} <span style="text-transform: lowercase;">{lang:Via}</span> <a href="{ReblogParentURL}">{ReblogParentName}</a></p>{/block:RebloggedFrom}
                         
-                        <a href="{Permalink}">{Month} {DayOfMonth}, {Year}</a>{block:IfNotDisqusShortname}{block:NoteCount}, {NoteCountWithLabel}{/block:NoteCount}{block:IfNotDisqusShortname}{block:IfDisqusShortname}. {lang:It has NoteCount notes and 0 comments}{/block:IfDisqusShortname}{block:IfAuthor}. {lang:By PostAuthorName}{/block:IfAuthor}{block:HasTags}. {lang:Tagged with} {block:Tags}<a href="{TagURL}" style="">{Tag}</a> {/block:Tags}{/block:HasTags}
+                        {block:IfDailyPagination}{lang:Posted on DayOfWeek DayOfMonth Month Year 3}{/block:IfDailyPagination}{block:IfNotDailyPagination}<a href="{Permalink}">{Month} {DayOfMonth}, {Year}</a>{/block:IfNotDailyPagination}{block:IfNotDisqusShortname}{block:NoteCount}, {NoteCountWithLabel}{/block:NoteCount}{block:IfNotDisqusShortname}{block:IfDisqusShortname}. {lang:It has NoteCount notes and 0 comments}{/block:IfDisqusShortname}{block:IfAuthor}. {lang:By PostAuthorName}{/block:IfAuthor}{block:HasTags}. {lang:Tagged with} {block:Tags}<a href="{TagURL}" style="">{Tag}</a> {/block:Tags}{/block:HasTags}{block:IfDailyPagination} - <a href="{Permalink}">{lang:Permalink}</a>{/block:IfDailyPagination}
                     </footer>
                     
                     {block:PermalinkPage}
@@ -938,6 +1066,20 @@
                     </div>
                     <div style="clear:both"></div>
                 {/block:PermalinkPagination}
+                
+                {block:DayPagination}
+                    <div class="nav-prev">
+                    {block:NextDayPage}
+                        <a href="{NextDayPage}">← {ShortMonth} {DayOfMonth}</a>
+                    {/block:NextDayPage}
+                    </div>
+                    <div class="nav-next">
+                    {block:PreviousDayPage}
+                        <a href="{PreviousDayPage}">{ShortMonth} {DayOfMonth} →</a>
+                    {/block:PreviousDayPage}
+                    </div>
+                    <div style="clear:both"></div>
+                {/block:DayPagination}
         </div>
         <div class="credits">
             {block:IfCopyright}{Title} © {CopyrightYears}. {/block:IfCopyright}<a href="https://www.tumblr.com/theme/40635" target="_blank">Publish on Tumblr</a> Theme. {lang:Powered by Tumblr 2}
