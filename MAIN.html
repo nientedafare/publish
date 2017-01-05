@@ -529,6 +529,11 @@
                 width: 100%;
                 font-size: 0.8em;
             }
+            .related h2,
+            .related h3,
+            .related h4 {
+                margin: 5px 0;
+            }
             .audio_container_related {
                 width: 100%;
                 overflow: hidden;
@@ -560,6 +565,15 @@
             .entry_related {
                 max-height: 260px;
                 overflow-y: hidden;
+            }
+            .embed_related {
+                width: 100%;
+            }
+            .embed_related iframe {
+                width: 100%;
+            }
+            .chat_related {
+                padding: 0 10px;
             }
             
             {CustomCSS}
@@ -710,6 +724,25 @@
                             <h5 style="margin-top:5px" class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
                         </div>
                         {/block:Text}
+                        {block:Chat}
+                        <div class="post chat">
+                            {block:Title}
+                                <h4><a href="{Permalink}">{Title}</a></h4>
+                            {/block:Title}
+                            <div class="entry_related">
+                            <ul class="chat_related">
+                                {block:Lines}
+                                    <div class="{Alt} user_{UserNumber}">
+                                        {block:Label}
+                                            <span class="label">{Label}</span>
+                                        {/block:Label}<span class="line">{Line}</span>
+                                    </div>
+                                {/block:Lines}
+                            </ul>
+                            </div>
+                            <h5 class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
+                        </div>
+                        {/block:Chat}
                         {block:Link}
                         <div class="post link">
                             <h4><a href="{URL}" class="link" {Target}>{Name} ➦</a></h14
@@ -718,7 +751,7 @@
                             {/block:Description}
                             <h5 style="margin-top:5px" class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
                         </div>
-                    {/block:Link}
+                        {/block:Link}
                         {block:Photo}
                         <div class="post photo">
                             <a href="{Permalink}"><img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/></a>
@@ -771,6 +804,11 @@
                                 </div>
                             </div>
                             {/block:AudioPlayer}
+                            {block:AudioEmbed}
+                            <div class="embed_related">
+                                {AudioEmbed-250}
+                            </div>
+                            {/block:AudioEmbed}
                             <h5 class="permalink_related"><a href="{Permalink}">{lang:Continue reading}...</a></h5>
                         </div>
                         {/block:Audio}
@@ -993,12 +1031,14 @@
                             <div style="clear:both"></div>
                             {/block:AudioPlayer} 
                             
-                            <div class="embed_640">
-                                {AudioEmbed-250}
-                            </div>
-                            <div class="embed_641">
-                                {AudioEmbed-400}
-                            </div>
+                            {block:AudioEmbed}
+                                <div class="embed_640">
+                                    {AudioEmbed-250}
+                                </div>
+                                <div class="embed_641">
+                                    {AudioEmbed-400}
+                                </div>
+                            {/block:AudioEmbed}
                             
                             {block:Caption}
                                 <div class="caption">{Caption}</div>
