@@ -154,20 +154,55 @@
                 content: close-quote;
             }
             table {
-                border-collapse: collapse;
-            }
-            table, th, td {
-                border: 1px solid {color:Border};
+                border-spacing: 0;
+                border-collapse: separate;
+                width: 100%;
+                text-align: left;
+                margin: 0 0 1.5em;
             }
             th, td {
-                padding: 2px 5px;
+                padding: 4px 0;
             }
-            caption { font-size: 0.8em; padding: 0 6px 2px 6px;}
+            th {
+                font-family: {font:Heading};
+                font-weight: normal;
+                font-weight: 400;
+                border-bottom: 1.5px solid {color:Border};
+            }
+            td {
+                font-weight: normal;
+                font-weight: 300;
+                border-bottom: 1px solid {color:Border};
+            }
+            caption { 
+                font-size: 0.8em; 
+                padding: 0 6px 2px 6px;
+                text-align: center;
+            }
             hr {
-                height: 0px;
-                border: .1px solid {color:Body};
-                color,
-                background-color: {color:Body};
+                background-color: {color:Border};
+                margin-bottom: 1.5em;
+                height: 1px;
+                border: 0;
+            }
+            mark, 
+            ins {
+                background: #fff9c0;
+                text-decoration: none;
+            }
+            abbr, 
+            acronym {
+                border-bottom: 1px dotted {color:Body};
+                cursor: help;
+            }
+            code, 
+            kbd, 
+            tt, 
+            var {
+                font: 14px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+            }
+            dt {
+                font-weight: bold;
             }
             
             .content a {
@@ -411,8 +446,16 @@
             .audio_player th,
             .audio_player td {
                 text-align: left;
-                border: 0px;
+                border: 0;
                 padding: 0;
+                width: auto;
+                margin: 0;
+            }
+            .audio_player th {
+                font-style: italic;
+            }
+            .audio_player td {
+                padding-right: 2px;
             }
             .videoWrapper {
                 position: relative;
@@ -1062,19 +1105,19 @@
                                         {block:TrackName}
                                         <tr>
                                             <td><span class="label">Track:&nbsp;</span></td>
-                                            <td><span class="line">{TrackName}</span></td>
+                                            <th><span style="margin-left:-2px">{TrackName}</span></th>
                                         </tr>
                                         {/block:TrackName}
                                         {block:Artist}
                                         <tr>
                                             <td><span class="label">Artist:</span></td>
-                                            <td><span class="line">{Artist}</span></td>
+                                            <th>{Artist}</th>
                                         </tr>
                                         {/block:Artist}
                                         {block:Album}
                                         <tr>
                                             <td><span class="label">Album:</span></td>
-                                            <td><span class="line">{Album}</span></td>
+                                            <th>{Album}</th>
                                         </tr>
                                         {/block:Album}
                                     </table>
