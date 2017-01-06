@@ -25,6 +25,8 @@
         
         <meta name="image:Portrait" content="http://static.tumblr.com/qbdaa2m/8rOoiyk8q/king-miror-2400px.png"/>
         <meta name="image:Wallpaper" content=""/>
+        <meta name="image:Banner IndexPage" content=""/>
+        <meta name="image:Banner AllPages" content=""/>
         <meta name="color:Background" content="#282828"/>
         <meta name="color:Main" content="#ffffff"/>
         <meta name="color:Heading" content="#404040"/>
@@ -52,7 +54,12 @@
         <meta name="select:Wallpaper size" content="auto" title="auto">
         <meta name="select:Wallpaper size" content="cover" title="cover">
         <meta name="select:Wallpaper size" content="contain" title="contain">
+        <meta name='text:Text IndexPage' content=""/>
+        <meta name='text:Text AllPages' content=""/>
+        <meta name='text:Link Banner IndexPage' content=""/>
+        <meta name='text:Link Banner AllPages' content=""/>
         <meta name='text:Disqus Shortname' content=""/>
+        <meta name='text:Footer Text' content=""/>
         <meta name="text:Wallpaper position" content="no-repeat fixed center"/>
         <meta name="text:Tag 1" content=""/>
         <meta name="text:Tag 2" content=""/>
@@ -262,7 +269,8 @@
                 #likes,
                 #follow,
                 .group,
-                .related {
+                .related,
+                .sidebanner {
                     display: none;
                 }
             }
@@ -321,6 +329,13 @@
                 float: left;
                 width: 45%;
                 margin: 0 5% 5px 0;
+            }
+            .sidebanner {
+                font-size: 0.9em;
+                margin: 40px 0;
+            }
+            .sidebanner iframe {
+                width: 100%;
             }
             
             /* Posts */
@@ -575,7 +590,7 @@
             .chat_related {
                 padding: 0 10px;
             }
-            
+
             {CustomCSS}
         </style>
     </head>
@@ -684,6 +699,35 @@
                     </div>
                 </div>
             {/block:IfSearch}
+            
+            <div class="sidebanner">
+                {block:IndexPage}
+                {block:IfTextIndexPage}
+                <div class="aside">
+                    <div class="videoWrapperr">
+                    {text:Text IndexPage}
+                    </div>
+                </div>
+                {/block:IfTextIndexPage}
+                {block:IfBannerIndexPageImage}
+                <div class="aside">
+                    <a href="{text:Link Banner IndexPage}"><img src="{image:Banner IndexPage}"></a>
+                </div>
+                {/block:IfBannerIndexPageImage}
+                {/block:IndexPage}
+                {block:IfBannerAllPagesImage}
+                <div class="aside">
+                    <a href="{text:Link Banner AllPages}"><img src="{image:Banner AllPages}"></a>
+                </div>
+                {/block:IfBannerAllPagesImage}
+                {block:IfTextAllPages}
+                <div class="aside">
+                    <div class="videoWrapperr">
+                    {text:Text AllPages}
+                    </div>
+                </div>
+                {/block:IfTextAllPages}
+            </div>
 
             {block:IndexPage}
                 {block:IfFollow}
@@ -732,11 +776,12 @@
                             <div class="entry_related">
                             <ul class="chat_related">
                                 {block:Lines}
-                                    <div class="{Alt} user_{UserNumber}">
-                                        {block:Label}
-                                            <span class="label">{Label}</span>
-                                        {/block:Label}<span class="line">{Line}</span>
-                                    </div>
+                                <div class="{Alt} user_{UserNumber}">
+                                    {block:Label}
+                                    <span class="label">{Label}</span>
+                                    {/block:Label}
+                                    <span class="line">{Line}</span>
+                                </div>
                                 {/block:Lines}
                             </ul>
                             </div>
@@ -745,7 +790,7 @@
                         {/block:Chat}
                         {block:Link}
                         <div class="post link">
-                            <h4><a href="{URL}" class="link" {Target}>{Name} ➦</a></h14
+                            <h4><a href="{URL}" class="link" {Target}>{Name} ➦</a></h4>
                             {block:Description}
                                 <div class="entry_related">{Description}</div>
                             {/block:Description}
@@ -1049,7 +1094,7 @@
                     <footer class="entry-meta">
                         {block:RebloggedFrom}<p>{block:ContentSource}{lang:Source}: <a href="{SourceURL}">{SourceTitle}</a>{/block:ContentSource} <span style="text-transform: lowercase;">{lang:Via}</span> <a href="{ReblogParentURL}">{ReblogParentName}</a></p>{/block:RebloggedFrom}
                         
-                        {block:IfDailyPagination}{lang:Posted on DayOfWeek DayOfMonth Month Year 3}{/block:IfDailyPagination}{block:IfNotDailyPagination}<a href="{Permalink}">{Month} {DayOfMonth}, {Year}</a>{/block:IfNotDailyPagination}{block:IfNotDisqusShortname}{block:NoteCount}, {NoteCountWithLabel}{/block:NoteCount}{block:IfNotDisqusShortname}{block:IfDisqusShortname}. {lang:It has NoteCount notes and 0 comments}{/block:IfDisqusShortname}{block:IfAuthor}. {lang:By PostAuthorName}{/block:IfAuthor}{block:HasTags}. {lang:Tagged with} {block:Tags}<a href="{TagURL}" style="">{Tag}</a> {/block:Tags}{/block:HasTags}{block:IfDailyPagination} - <a href="{Permalink}">{lang:Permalink}</a>{/block:IfDailyPagination}
+                        {block:Date}{block:IfDailyPagination}{lang:Posted on DayOfWeek DayOfMonth Month Year 3}{/block:IfDailyPagination}{block:IfNotDailyPagination}<a href="{Permalink}">{Month} {DayOfMonth}, {Year}</a>{/block:IfNotDailyPagination}{/block:Date}{block:IfNotDisqusShortname}{block:NoteCount}, {NoteCountWithLabel}{/block:NoteCount}{/block:IfNotDisqusShortname}{block:IfDisqusShortname}. {lang:It has NoteCount notes and 0 comments}{/block:IfDisqusShortname}{block:IfAuthor}. {lang:By PostAuthorName}{/block:IfAuthor}{block:HasTags}. {lang:Tagged with} {block:Tags}<a href="{TagURL}" style="">{Tag}</a> {/block:Tags}{/block:HasTags}{block:IfDailyPagination} - <a href="{Permalink}">{lang:Permalink}</a>{/block:IfDailyPagination}
                     </footer>
                     
                     {block:PermalinkPage}
@@ -1122,6 +1167,7 @@
                 {/block:DayPagination}
         </div>
         <div class="credits">
+            {block:IfFooterText}{text:Footer Text}<br><br>{/block:IfFooterText}
             {block:IfCopyright}{Title} © {CopyrightYears}. {/block:IfCopyright}<a href="https://www.tumblr.com/theme/40635" target="_blank">Publish on Tumblr</a> Theme. {lang:Powered by Tumblr 2}
         </div>
     </div>
