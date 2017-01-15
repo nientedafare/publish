@@ -132,8 +132,8 @@
             }
             blockquote {
                 font-style: italic;
-                margin-left: 20px;
-                padding-left: 19px;
+                margin-left: 19.5px;
+                padding-left: 19.5px;
                 border-left: solid 1px {color:Border};
             }
             blockquote i,
@@ -194,6 +194,15 @@
             acronym {
                 border-bottom: 1px dotted {color:Body};
                 cursor: help;
+            }
+            pre {
+            	overflow: auto;
+            	margin-bottom: 1.6em;
+            	padding: 1.6em;
+            	max-width: 100%;
+            	background: #F2F7F9;
+            	font: 12px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+            	line-height: 1.6;
             }
             code, 
             kbd, 
@@ -445,6 +454,7 @@
             .audio_player table,
             .audio_player th,
             .audio_player td {
+                vertical-align: top;
                 text-align: left;
                 border: 0;
                 padding: 0;
@@ -631,6 +641,7 @@
             .entry_related {
                 max-height: 260px;
                 overflow-y: hidden;
+                margin-bottom: 1em;
             }
             .embed_related {
                 width: 100%;
@@ -872,7 +883,7 @@
                         {block:Answer}
                         <div class="post answer">
                             <p><img src="{AskerPortraitURL-96}" style="width:16px; margin-right:5px;">{lang:Asker asked}:</p>
-                            <div class="blockquoteblockquote_related">
+                            <div class="blockquote_related">
                                 <a href="{Permalink}">{Question}</a>
                             </div>
                             <p>{Answer}</p>
